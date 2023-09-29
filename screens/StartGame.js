@@ -1,15 +1,30 @@
-import {StyleSheet, TextInput, View} from 'react-native';
+import {Alert, StyleSheet, TextInput, View} from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 import {useState} from 'react';
 
-const StartGame = () => {
+const StartGame = props => {
   const [enteredValue, setEnteredValue] = useState('');
 
   const valueChangeHandler = value => {
     setEnteredValue(value);
   };
 
-  const confirmHandler = value => {};
+  const resetInput = () => {
+    setEnteredValue('');
+  };
+
+  const confirmHandler = () => {
+    const chosenNumber = parseInt(enteredValue, 10);
+
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert('Invalid Number', 'Enter a valid Number !', [
+        {text: 'Okay', style: 'destructive', onPress: resetInput},
+      ]);
+      return;
+    }
+
+    props.onNumberChosen(chosenNumber);
+  };
 
   return (
     <View style={styles.inputContainer}>
@@ -24,7 +39,7 @@ const StartGame = () => {
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onPress={resetInput}>Reset</PrimaryButton>
         </View>
 
         <View style={styles.button}>
