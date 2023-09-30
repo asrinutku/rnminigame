@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, ImageBackground, SafeAreaView} from 'react-native';
 import StartGame from './screens/StartGame';
-import {LinearGradient} from 'expo-linear-gradient';
 import Game from './screens/Game';
 import colors from './util/colors';
+import LinearGradient from 'react-native-linear-gradient';
 
 function App() {
   const [userNumber, setUserNumber] = useState();
@@ -15,7 +15,7 @@ function App() {
   let screen = <StartGame onNumberChosen={chosenNumberHandler} />;
 
   if (userNumber) {
-    screen = <Game />;
+    screen = <Game userNumber={userNumber} />;
   }
 
   return (

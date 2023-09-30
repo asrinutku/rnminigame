@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import colors from '../util/colors';
+import colors from '../../util/colors';
 
 const Titlebar = props => {
   return <Text style={styles.title}>{props.title}</Text>;
